@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa - Ficha Limpa</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="https://technext.github.io/mazer/assets/images/favicon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
+    <link rel="stylesheet" href="assets/css/pages/dripicons.css">
+
+    <link rel="stylesheet" href="assets/vendors/apexcharts/apexcharts.css">
+
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #myChart {
+            height: 100%;
+            width: 100%;
+            min-height: 150px;
+        }
+
+        .zc-ref {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="sidebar-wrapper active" >
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-center">
+                    <div class="logo">
+                        <a href="home.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset="" style="height: 100px; text-align: center;"></a>
+                    </div>
+                    <div class="toggler">
+                        <a href="home.html#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    <li class="sidebar-item ">
+                        <a href="home.html" class='sidebar-link'>
+                            Dashboard 
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">Dados</li>
+
+                    <li class="sidebar-item active ">
+                        <a href="search.html" class='sidebar-link' style="color: #fff; font-weight: bold;">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            Pesquisa
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="manual-register.html" class='sidebar-link'>
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                           Cadastro manual
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="form-element-input-group.html#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Visualização de dados</h3>
+                            <p class="text-subtitle text-muted">Vizualise aqui o credit score de um determinado usuário
+                                ou perfil
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dados</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Pesquisa</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inputs Group with Buttons -->
+                <section id="input-group-buttons">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Pesquisar</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p> Dado para pesquisa </p>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-1">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <div class="icon dripicons-search"></div>
+                                                    </span>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nome, BI, número de telefone..."
+                                                        aria-label="Nome, BI, número de telefone..."
+                                                        aria-describedby="button-addon2">
+                                                    <button onclick="executar()" class="btn btn-outline-primary" type="button"
+                                                        id="button-addon2" style="border-color: #416B07;color: #000; font-weight: bold; outline: none;">Pesquisar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Inputs Group with Buttons end -->
+
+            </div>
+
+            <div class="row" style="display: none;" id="result-search">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Credit Score do usuário</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12 col-lg-3">
+                                <div class="card">
+                                    <div class="card-body py-4 px-5">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-xl">
+                                                <img src="assets/images/faces/es.jpeg" alt="Evandro Silva">
+                                            </div>
+                                            <div class="ms-3 name">
+                                                <h5 class="font-bold">Evandro Silva</h5>
+                                                <h6 class="text-muted mb-0">@SkeBug</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon dark">
+                                                        <i class="iconly-boldShow"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Histórico de pagamentos</h6>
+                                                    <h6 class="font-extrabold mb-0">40 de 50 Pontos de dados positivos</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon blue">
+                                                        <i class="iconly-boldProfile"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Quantidade de dívidas</h6>
+                                                    <h6 class="font-extrabold mb-0">50 de 70 Pontos de Dados positivos</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon green">
+                                                        <i class="iconly-boldAdd-User"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Duração do crédito</h6>
+                                                    <h6 class="font-extrabold mb-0">15 de 40 Pontos de dados positivos</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon red">
+                                                        <i class="iconly-boldBookmark"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Novo crédito</h6>
+                                                    <h6 class="font-extrabold mb-0">37 de 37 Pontos de dados positivos</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon purple">
+                                                        <i class="iconly-boldBookmark"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Crédito mix</h6>
+                                                    <h6 class="font-extrabold mb-0">60 de 72 Pontos de dados positivos</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2022 &copy; Ficha Limpa</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+        window.feed = function (callback) {
+            var tick = {};
+            tick.plot0 = Math.ceil(350 + (Math.random() * 50));
+            callback(JSON.stringify(tick));
+        };
+
+        var myConfig = {
+            type: "gauge",
+            globals: {
+                fontSize: 25
+            },
+            plotarea: {
+                marginTop: 80
+            },
+            plot: {
+                size: '100%',
+                valueBox: {
+                    placement: 'center',
+                    text: '%v', //default
+                    fontSize: 35,
+                    rules: [{
+                        rule: '%v >= 800 && %v <= 850',
+                        text: '%v<br>EXCELENTE'
+                    },
+                    {
+                        rule: '%v >= 670 && %v <= 799',
+                        text: '%v<br>Bom'
+                    },
+                    {
+                        rule: '%v >= 501 && %v <= 669',
+                        text: '%v<br>Justo'
+                    },
+                    {
+                        rule: '%v = 300 && %v <= 500',
+                        text: '%v<br>Mau'
+                    }
+                    ]
+                }
+            },
+            tooltip: {
+                borderRadius: 5
+            },
+            scaleR: {
+                aperture: 180,
+                minValue: 300,
+                maxValue: 850,
+                step: 50,
+                center: {
+                    visible: false
+                },
+                tick: {
+                    visible: false
+                },
+                item: {
+                    offsetR: 0,
+                    rules: [{
+                        rule: '%i == 9',
+                        offsetX: 15
+                    }]
+                },
+                labels: ['300', '', '', '', '', '', '501', '670', '750', '700', '', '850'],
+                ring: {
+                    size: 50,
+                    rules: [{
+                        rule: '%v <= 580',
+                        backgroundColor: '#C70000'
+                    },
+                    {
+                        rule: '%v > 580 && %v < 640',
+                        backgroundColor: '#F7BB00'
+                    },
+                    {
+                        rule: '%v >= 640 && %v < 700',
+                        backgroundColor: '#F7BB00'
+                    },
+                    {
+                        rule: '%v >= 700',
+                        backgroundColor: '#15C530'
+                    }
+                    ]
+                }
+            },
+
+            series: [{
+                values: [800], // starting value
+                backgroundColor: 'black',
+                indicator: [10, 10, 10, 10, 0.75],
+                animation: {
+                    effect: 2,
+                    method: 1,
+                    sequence: 4,
+                    speed: 900
+                },
+            }]
+        };
+
+        zingchart.render({
+            id: 'myChart',
+            data: myConfig,
+            height: 500,
+            width: '100%'
+        });
+    </script>
+</body>
+
+</html>

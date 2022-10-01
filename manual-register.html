@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro manual - Ficha Limpa</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="https://technext.github.io/mazer/assets/images/favicon.svg">
+
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+
+    <script src="https://use.fontawesome.com/224b957923.js"></script>
+    <script src="https://use.fontawesome.com/991b046fdb.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active" >
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-center">
+                        <div class="logo">
+                            <a href="home.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset="" style="height: 100px; text-align: center;"></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="home.html#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-item ">
+                            <a href="home.html" class='sidebar-link'>
+                                Dashboard 
+                            </a>
+                        </li>
+
+                        <li class="sidebar-title">Dados</li>
+
+                        <li class="sidebar-item  ">
+                            <a href="search.html" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>Pesquisa</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active ">
+                            <a href="manual-register.html" class='sidebar-link' style="color: #fff; font-weight: bold;">
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                               Cadastro manual
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="search.html#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Pesquisa de credit score</h3>
+                            <p class="text-subtitle text-muted">Confira os hábitos de hábito de um usuário ou perfil</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dados</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Pesquisa</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="card">
+                        <!-- <div class="card-header">
+                            <h4 class="card-title">Default Layout</h4>
+                        </div> -->
+                        <div class="card-body">
+                            <div class="col-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Carregar ficheiro com dados</h5>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <p class="card-text">Carregue aqui o seu ficheiro Excel, Json ou XML
+                                            </p>
+                                            <!-- File uploader with validation -->
+                                            <input type="file" class="with-validation-filepond" required multiple
+                                                data-max-file-size="1MB" data-max-files="3">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            Dados obtidos a partir dos ficheiros carregados e/ou API
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Divida</th>
+                                        <th>Status</th>
+                                        <th>Data do pedido</th>
+                                        <th>Prazo do pagamento</th>
+                                        <th>Data do pagamento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Evandro Silva</td>
+                                        <td>evandrosilva.programmer@gmail.com</td>
+                                        <td>932 77 85 78</td>
+                                        <td>300 000,00 Kz</td>
+                                        <td>
+                                            <span class="badge bg-success">Paga</span>
+                                        </td>
+                                        <td>11 / 03 / 2022</td>
+                                        <td>3 Meses</td>
+                                        <td>05 / 05 / 2022</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Gilson Fortunato</td>
+                                        <td>gilsonfortunato@gmail.com</td>
+                                        <td>924 19 26 56</td>
+                                        <td>850 000,00 Kz</td>
+                                        <td>
+                                            <span class="badge bg-danger">Pendente</span>
+                                        </td>
+                                        <td>15 / 12 / 2021</td>
+                                        <td>2 Meses</td>
+                                        <td>08 / 06 / 2022</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Jorge Costa</td>
+                                        <td>jorgecosta@gmail.com</td>
+                                        <td>942 52 33 44</td>
+                                        <td>233 740,00 Kz</td>
+                                        <td>
+                                            <span class="badge bg-danger">Pendente</span>
+                                        </td>
+                                        <td>11 / 10 / 2021</td>
+                                        <td>3 Meses</td>
+                                        <td>10 / 07 / 2022</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Fernando Santos</td>
+                                        <td>fernandosantos@gmail.com</td>
+                                        <td>923 215 717</td>
+                                        <td>435 320,12 Kz</td>0
+                                        <td>
+                                            <span class="badge bg-success">Paga</span>
+                                        </td>
+                                        <td>07 / 01 / 2022</td>
+                                        <td>1 Mês</td>
+                                        <td>03/ 02 / 2022</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2022 &copy; Ficha Limpa</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <!-- filepond validation -->
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+    <!-- image editor -->
+    <script
+        src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+
+    <!-- toastify -->
+    <script src="assets/vendors/toastify/toastify.js"></script>
+
+    <!-- filepond -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script>
+        // register desired plugins...
+        FilePond.registerPlugin(
+            // validates the size of the file...
+            FilePondPluginFileValidateSize,
+            // validates the file type...
+            FilePondPluginFileValidateType,
+
+            // calculates & dds cropping info based on the input image dimensions and the set crop ratio...
+            FilePondPluginImageCrop,
+            // preview the image file type...
+            FilePondPluginImagePreview,
+            // filter the image file
+            FilePondPluginImageFilter,
+            // corrects mobile image orientation...
+            FilePondPluginImageExifOrientation,
+            // calculates & adds resize information...
+            FilePondPluginImageResize,
+        );
+
+        FilePond.setOptions({
+            // labelIdle: 'Drag & Drop your files or <span class="filepond--label-action"> Browse </span>'
+        labelIdle: 'Arraste e solte o arquivo ou <span class="filepond--label-action"> Clique aqui </span> para procurar em seu computador',
+        // labelInvalidField: 'Field contains invalid files',
+        labelInvalidField: 'Arquivos inválidos',
+        // labelFileWaitingForSize: 'Waiting for size',
+        labelFileWaitingForSize: 'Calculando o tamanho do arquivo',
+        // labelFileSizeNotAvailable: 'Size not available',
+        labelFileSizeNotAvailable: 'Tamanho do arquivo indisponível',
+        // labelFileLoading: 'Loading',
+        labelFileLoading: 'Carregando',
+        // labelFileLoadError: 'Error during load',
+        labelFileLoadError: 'Erro durante o carregamento',
+        // labelFileProcessing: 'Uploading',
+        labelFileProcessing: 'Enviando',
+        // labelFileProcessingComplete: 'Upload complete',
+        labelFileProcessingComplete: 'Envio finalizado',
+        // labelFileProcessingAborted: 'Upload cancelled',
+        labelFileProcessingAborted: 'Envio cancelado',
+        // labelFileProcessingError: 'Error during upload',
+        labelFileProcessingError: 'Erro durante o envio',
+        // labelFileProcessingRevertError: 'Error during revert',
+        labelFileProcessingRevertError: 'Erro ao reverter o envio',
+        // labelFileRemoveError: 'Error during remove',
+        labelFileRemoveError: 'Erro ao remover o arquivo',
+        // labelTapToCancel: 'tap to cancel',
+        labelTapToCancel: 'clique para cancelar',
+        // labelTapToRetry: 'tap to retry',
+        labelTapToRetry: 'clique para reenviar',
+        // labelTapToUndo: 'tap to undo',
+        labelTapToUndo: 'clique para desfazer',
+        // labelButtonRemoveItem: 'Remove',
+        labelButtonRemoveItem: 'Remover',
+        // labelButtonAbortItemLoad: 'Abort',
+        labelButtonAbortItemLoad: 'Abortar',
+        // labelButtonRetryItemLoad: 'Retry',
+        labelButtonRetryItemLoad: 'Reenviar',
+        // labelButtonAbortItemProcessing: 'Cancel',
+        labelButtonAbortItemProcessing: 'Cancelar',
+        // labelButtonUndoItemProcessing: 'Undo',
+        labelButtonUndoItemProcessing: 'Desfazer',
+        // labelButtonRetryItemProcessing: 'Retry',
+        labelButtonRetryItemProcessing: 'Reenviar',
+        // labelButtonProcessItem: 'Upload',
+        labelButtonProcessItem: 'Enviar',
+        // labelMaxFileSizeExceeded: 'File is too large',
+        labelMaxFileSizeExceeded: 'Arquivo é muito grande',
+        // labelMaxFileSize: 'Maximum file size is {filesize}',
+        labelMaxFileSize: 'O tamanho máximo permitido: {filesize}',
+        // labelMaxTotalFileSizeExceeded: 'Maximum total size exceeded',
+        labelMaxTotalFileSizeExceeded: 'Tamanho total dos arquivos excedido',
+        // labelMaxTotalFileSize: 'Maximum total file size is {filesize}',
+        labelMaxTotalFileSize: 'Tamanho total permitido: {filesize}',
+        // labelFileTypeNotAllowed: 'File of invalid type',
+        labelFileTypeNotAllowed: 'Tipo de arquivo inválido',
+        // fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
+        fileValidateTypeLabelExpectedTypes: 'Tipos de arquivo suportados são {allButLastType} ou {lastType}',
+        // imageValidateSizeLabelFormatError: 'Image type not supported',
+        imageValidateSizeLabelFormatError: 'Tipo de imagem inválida',
+        // imageValidateSizeLabelImageSizeTooSmall: 'Image is too small',
+        imageValidateSizeLabelImageSizeTooSmall: 'Imagem muito pequena',
+        // imageValidateSizeLabelImageSizeTooBig: 'Image is too big',
+        imageValidateSizeLabelImageSizeTooBig: 'Imagem muito grande',
+        // imageValidateSizeLabelExpectedMinSize: 'Minimum size is {minWidth} × {minHeight}',
+        imageValidateSizeLabelExpectedMinSize: 'Tamanho mínimo permitida: {minWidth} × {minHeight}',
+        // imageValidateSizeLabelExpectedMaxSize: 'Maximum size is {maxWidth} × {maxHeight}',
+        imageValidateSizeLabelExpectedMaxSize: 'Tamanho máximo permitido: {maxWidth} × {maxHeight}',
+        // imageValidateSizeLabelImageResolutionTooLow: 'Resolution is too low',
+        imageValidateSizeLabelImageResolutionTooLow: 'Resolução muito baixa',
+        // imageValidateSizeLabelImageResolutionTooHigh: 'Resolution is too high',
+        imageValidateSizeLabelImageResolutionTooHigh: 'Resolução muito alta',
+        // imageValidateSizeLabelExpectedMinResolution: 'Minimum resolution is {minResolution}',
+        imageValidateSizeLabelExpectedMinResolution: 'Resolução mínima permitida: {minResolution}',
+        // imageValidateSizeLabelExpectedMaxResolution: 'Maximum resolution is {maxResolution}'
+        imageValidateSizeLabelExpectedMaxResolution: 'Resolução máxima permitida: {maxResolution}'
+
+        });
+
+        // Filepond: Basic
+        FilePond.create(document.querySelector('.basic-filepond'), {
+            allowImagePreview: false,
+            allowMultiple: false,
+            allowFileEncode: false,
+            required: false
+        });
+
+        // Filepond: Multiple Files
+        FilePond.create(document.querySelector('.multiple-files-filepond'), {
+            allowImagePreview: false,
+            allowMultiple: true,
+            allowFileEncode: false,
+            required: false
+        });
+
+        // Filepond: With Validation
+        FilePond.create(document.querySelector('.with-validation-filepond'), {
+            allowImagePreview: false,
+            allowMultiple: true,
+            allowFileEncode: false,
+            required: true,
+        });
+
+        // Filepond: ImgBB with server property
+        FilePond.create(document.querySelector('.imgbb-filepond'), {
+            allowImagePreview: false,
+            server: {
+                process: (fieldName, file, metadata, load, error, progress, abort) => {
+                    // We ignore the metadata property and only send the file
+
+                    const formData = new FormData();
+                    formData.append(fieldName, file, file.name);
+
+                    const request = new XMLHttpRequest();
+                    // you can change it by your client api key
+                    request.open('POST', 'https://api.imgbb.com/1/upload?key=762894e2014f83c023b233b2f10395e2');
+
+                    request.upload.onprogress = (e) => {
+                        progress(e.lengthComputable, e.loaded, e.total);
+                    };
+
+                    request.onload = function () {
+                        if (request.status >= 200 && request.status < 300) {
+                            load(request.responseText);
+                        }
+                        else {
+                            error('oh no');
+                        }
+                    };
+
+                    request.onreadystatechange = function () {
+                        if (this.readyState == 4) {
+                            if (this.status == 200) {
+                                let response = JSON.parse(this.responseText);
+
+                                Toastify({
+                                    text: "Success uploading to imgbb! see console f12",
+                                    duration: 3000,
+                                    close: true,
+                                    gravity: "bottom",
+                                    position: "right",
+                                    backgroundColor: "#4fbe87",
+                                }).showToast();
+
+                                console.log(response);
+                            } else {
+                                Toastify({
+                                    text: "Failed uploading to imgbb! see console f12",
+                                    duration: 3000,
+                                    close: true,
+                                    gravity: "bottom",
+                                    position: "right",
+                                    backgroundColor: "#ff0000",
+                                }).showToast();
+
+                                console.log("Error", this.statusText);
+                            }
+                        }
+                    };
+
+                    request.send(formData);
+                }
+            }
+        });
+
+        // Filepond: Image Preview
+        FilePond.create(document.querySelector('.image-preview-filepond'), {
+            allowImagePreview: true,
+            allowImageFilter: false,
+            allowImageExifOrientation: false,
+            allowImageCrop: false,
+            // acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
+            acceptedFileTypes: ['application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx'],
+            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                // Do custom type detection here and return with promise
+                resolve(type);
+            })
+        });
+
+        // Filepond: Image Crop
+        FilePond.create(document.querySelector('.image-crop-filepond'), {
+            allowImagePreview: true,
+            allowImageFilter: false,
+            allowImageExifOrientation: false,
+            allowImageCrop: true,
+            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                // Do custom type detection here and return with promise
+                resolve(type);
+            })
+        });
+
+        // Filepond: Image Exif Orientation
+        FilePond.create(document.querySelector('.image-exif-filepond'), {
+            allowImagePreview: true,
+            allowImageFilter: false,
+            allowImageExifOrientation: true,
+            allowImageCrop: false,
+            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                // Do custom type detection here and return with promise
+                resolve(type);
+            })
+        });
+
+        // Filepond: Image Filter
+        FilePond.create(document.querySelector('.image-filter-filepond'), {
+            allowImagePreview: true,
+            allowImageFilter: true,
+            allowImageExifOrientation: false,
+            allowImageCrop: false,
+            imageFilterColorMatrix: [
+                0.299, 0.587, 0.114, 0, 0,
+                0.299, 0.587, 0.114, 0, 0,
+                0.299, 0.587, 0.114, 0, 0,
+                0.000, 0.000, 0.000, 1, 0
+            ],
+            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                // Do custom type detection here and return with promise
+                resolve(type);
+            })
+        });
+
+        // Filepond: Image Resize
+        FilePond.create(document.querySelector('.image-resize-filepond'), {
+            allowImagePreview: true,
+            allowImageFilter: false,
+            allowImageExifOrientation: false,
+            allowImageCrop: false,
+            allowImageResize: true,
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            imageResizeMode: 'cover',
+            imageResizeUpscale: true,
+            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                // Do custom type detection here and return with promise
+                resolve(type);
+            })
+        });
+    </script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
